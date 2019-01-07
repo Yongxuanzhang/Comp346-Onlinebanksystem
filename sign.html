@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Welcome</title>
+</head>
+<body>
+  <div  class="main">
+    <?php
+      if(!empty($message)){
+    ?> <p> <?php echo $message; ?> </p>
+       <a href="./index.php">Back to Home</a>
+    <?php
+      }
+    ?>
+
+
+	
+	
+	
+    <?php if( !empty($user) ): ?>
+
+      <br />Welcome <?= $user; ?>
+      <br /><br />You are successfully logged in!
+      <br /><br />
+      <a href="<?php echo"info.php?client=".$_POST['client_id']?>">View Information</a><br/>
+	<a href="<?php echo"query.php?client=".$_POST['client_id']?>">Check Balances</a><br/>
+	<a href="<?php echo"movemoney.php?client=".$_POST['client_id']?>">Transfer money</a><br/>
+	<a href="<?php echo"paybill.php?client=".$_POST['client_id']?>">Pay a bill</a><br/>
+	<a href="<?php echo"change.php?client=".$_POST['client_id']?>">Change balance</a><br/>
+	
+	<a href="<?php echo"etransfer.php?client=".$user?>">e-transfer</a><br/>
+	
+	
+	<a href="logout.php">Logout?</a><br/>
+    <?php else  : ?>
+
+      <form action="index1.php" method="post">
+        Client ID: <input type="text" name="client_id">
+        Password: <input type="password" name="password">
+        <input type="submit" value="Client Login">
+      </form>
+
+ 	<form action="index1.php" method="post">
+        Employee ID: <input type="text" name="employee_id">
+        Password: <input type="password" name="password">
+        <input type="submit" value="Employee Login">
+      </form>
+
+      <a href="register.php">Register</a>
+
+    <?php endif; ?>
+    
+  </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Personal Information</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="grid.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+  
+  
+  
+  
+    <div class="container">
+
+      <div class="page-header">
+        <h1>Profile</h1>
+      </div>
+  	
+  <?php
+		//session_start();	
+		//echo $_SESSION['account_n'];
+		
+		require "../../database.php";
+	 	$conn = mysqli_connect($server,$username,$password) ;
+		if(! $conn )
+		{
+		    die('Fail: ' . mysqli_error($conn));
+		}
+		
+
+		$employee=$_COOKIE['mycookie1'];
+
+		//echo $employee;
+		mysqli_select_db($conn,$database);
+		
+		$sql = "select * from Employee WHERE id = '$employee';";
+		//echo 'Success';
+		$result = mysqli_query($conn,$sql);
+		if (!$result) {
+		printf("Error: %s\n", mysqli_error($conn));
+		exit();
+		}
+
+		$Num=mysqli_num_rows($result);
+		$row = mysqli_fetch_assoc($result);
+	
+		mysqli_free_result($result);
+		mysqli_close($conn);
+	?>
+  
+      <h3>employee ID</h3>
+      <div class="row">
+        <div class="col-md-6"><?=$row['id'];?></div>     
+      </div>
+
+      <h3>Name</h3>
+      <div class="row">
+        <div class="col-md-6"><?=$row['name'];?></div>     
+      </div>
+
+      <h3>Address</h3>
+       <div class="row">
+        <div class="col-md-6"><?=$row['address'];?></div>     
+      </div>
+
+	  
+	  <h3>Email Address</h3>
+       <div class="row">
+        <div class="col-md-6"><?=$row['email'];?></div>     
+      </div>
+	  
+	  <h3>Phone Number</h3>
+       <div class="row">
+        <div class="col-md-6"><?=$row['phone'];?></div>     
+      </div>
+	  
+	  
+	  <h3>Title</h3>
+       <div class="row">
+        <div class="col-md-6"><?=$row['title'];?></div>     
+      </div>
+	  
+	  
+       <h4><a href="../info/editinfo.php">Edit Profile</a></h4>	   
+       <h4><a href="../employeepage2.php">Back to Home</a></h4>
+	  
+	  
+      
+
+
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
